@@ -22,8 +22,8 @@
 ## 注意
 1. 本项目仅供学习使用，请勿用于商业用途。
 
-！English version is made by AI.
 Simple cloud storage
+！English version is made by AI.
 = = =
 ## Introduction
 A simple cloud disk that realizes the most basic functions, namely file upload, download, file deletion, user registration and login, etc.
