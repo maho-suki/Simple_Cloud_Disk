@@ -1,0 +1,69 @@
+### 用户注册
+POST http://localhost:8081/api/users/register
+Content-Type: application/json
+
+{
+    "username": "test_user",
+    "password": "123456",
+    "email": "test@example.com"
+}
+
+### 用户注销
+DELETE http://localhost:8081/api/users/81
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0X3VzZXIiLCJ1c2VySWQiOjgxLCJpYXQiOjE3NDUzMTY3NDgsImV4cCI6MTc0NTQwMzE0OH0.F1MoIV1wBw8crJI45lFyTmRfJg5q-zCUPzfHi0HEULc
+
+{
+    "password": "123456"
+}
+
+### 用户登录
+POST http://localhost:8081/api/users/login
+Content-Type: application/json
+
+{
+    "username": "test_user",
+    "password": "123456"
+}
+
+### 用户更改密码
+POST http://localhost:8081/api/users/reset-password
+Content-Type: application/json
+
+{
+    "username": "test_user",
+    "email": "test@example.com",
+    "newPassword": "123"
+}
+
+### 用户退出登录
+POST http://localhost:8081/api/users/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0X3VzZXIiLCJ1c2VySWQiOjgxLCJpYXQiOjE3NDUzMTYwNjAsImV4cCI6MTc0NTQwMjQ2MH0.Bb61CU6-8D0Smsx2N8Wf4Mbst8-3R3X5CED5bx6hp2k
+
+### 文件上传
+POST http://localhost:8081/api/files/upload
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0X3VzZXIiLCJ1c2VySWQiOjgyLCJpYXQiOjE3NDUzMjI1MTYsImV4cCI6MTc0NTQwODkxNn0.Y81hbZl4BYjhIvG0DvFqVY-3xMCS9jhJ_VisIrnnWYE
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test.txt"
+Content-Type: text/plain
+
+< ./test.txt
+--WebAppBoundary
+Content-Disposition: form-data; name="userId"
+
+82
+--WebAppBoundary
+Content-Disposition: form-data; name="targetPath"
+
+documents
+--WebAppBoundary--
+
+### 文件下载
+GET http://localhost:8081/api/files/download/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0X3VzZXIiLCJ1c2VySWQiOjgyLCJpYXQiOjE3NDUzMjI1MTYsImV4cCI6MTc0NTQwODkxNn0.Y81hbZl4BYjhIvG0DvFqVY-3xMCS9jhJ_VisIrnnWYE
+
+### 文件删除
+DELETE http://localhost:8081/api/files/delete/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0X3VzZXIiLCJ1c2VySWQiOjgyLCJpYXQiOjE3NDUzMjU1MDYsImV4cCI6MTc0NTQxMTkwNn0.UIGmenrM3MvLVN3OFTOvVCte2N3K7jdn8Co_hpt9m_8
