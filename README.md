@@ -18,7 +18,7 @@
 2. 导入数据库
 3. 修改application.yml文件中的数据库连接信息
 4. 运行后端Java项目（/src/main/java/com/maho/simple_network_disk/SimpleNetworkDiskApplication.java）及前端frontend文件夹中的Vue项目（npm run serve）
-5. 访问. 访问URL_ADDRESS:8080
+5. 访问. 访问URL_ADDRESS:8083
 ## 注意
 1. 本项目仅供学习使用，请勿用于商业用途。
 
@@ -43,6 +43,6 @@ Installation
 2. Import the database
 3. Modify the database connection information in the application.yml file
 4. Run the backend Java project(/src/main/java/com/maho/simple_network_disk/SimpleNetworkDiskApplication.java) and the Vue project in the frontend folder at the frontend(npm run serve)
-5. Access. Access URL_ADDRESS:8080
+5. Access. Access URL_ADDRESS:8083
 Attention
 This project is for study purposes only and must not be used for commercial purposes.
