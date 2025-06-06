@@ -23,7 +23,7 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   response => {
-    console.log('API响应数据:', response)  // 添加这行来调试
+    console.log('API响应数据:', response) 
     return response.data
   },
   error => {
@@ -41,5 +41,6 @@ instance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
 
 export default instance

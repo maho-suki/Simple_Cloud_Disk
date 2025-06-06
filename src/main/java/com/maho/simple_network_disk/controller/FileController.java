@@ -5,8 +5,11 @@ import com.maho.simple_network_disk.entity.File;
 import com.maho.simple_network_disk.entity.User;
 import com.maho.simple_network_disk.repository.FileRepository;
 import com.maho.simple_network_disk.security.JwtTokenProvider;
+import com.maho.simple_network_disk.service.FileDownloadHandler;
 import com.maho.simple_network_disk.service.FileService;
 import com.maho.simple_network_disk.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -98,9 +102,12 @@ public class FileController {
 
     // 文件下载
     @GetMapping("/download/{fileId}")
-    public ResponseEntity<Resource> downloadFile(
+    public void downloadFile(
             @PathVariable Long fileId,
-            @RequestHeader("Authorization") String token) {
+            @RequestHeader(value = "Range", required = false) String range,
+            @RequestHeader("Authorization") String token,
+            HttpServletRequest request,
+            HttpServletResponse response) {
         try {
             // 获取文件信息
             File fileInfo = fileService.getFileById(fileId);
@@ -110,28 +117,13 @@ public class FileController {
                 throw new IllegalArgumentException("无权访问此文件");
             }
 
-            // 创建文件资源
-            Path filePath = Paths.get(fileInfo.getFilePath());
-            Resource resource = new FileSystemResource(filePath.toFile());
-
-            // 如果文件不存在，抛出异常
-            if (!resource.exists()) {
-                throw new IllegalArgumentException("文件不存在");
-            }
-
-            // 设置文件名编码，防止中文乱码
-            String encodedFileName = URLEncoder.encode(fileInfo.getFileName(), StandardCharsets.UTF_8)
-                    .replaceAll("\\+", "%20");
-
-            // 返回文件流
-            return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFileName + "\"")
-                    .body(resource);
+            FileDownloadHandler handler = new FileDownloadHandler();
+            handler.handleDownload(response, new java.io.File(fileInfo.getFilePath()), range);
+            
         } catch (IllegalArgumentException e) {
-            throw e;
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         } catch (Exception e) {
-            throw new RuntimeException("文件下载失败", e);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 

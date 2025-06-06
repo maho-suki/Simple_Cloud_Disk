@@ -12,12 +12,12 @@
           <el-input v-model="loginForm.password" type="password" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleLogin" style="width: 100%">登录</el-button>
+          <el-button type="primary" @click="handleLogin" style="width: 100%; background-color: #FFB6C1;">登录</el-button>
         </el-form-item>
         <el-form-item>
           <div class="form-footer"> 
-            <el-link type="primary" @click="goToResetPassword">忘记密码？</el-link>
-            <el-link type="primary" @click="goToRegister">还没有账号？立即注册</el-link>
+            <el-link type="primary" @click="goToResetPassword" style="color: #FFB6C1;">忘记密码？</el-link>
+            <el-link type="primary" @click="goToRegister" style="color: #FFB6C1;">还没有账号？立即注册</el-link>
           </div>
         </el-form-item>
       </el-form>
@@ -60,6 +60,8 @@ export default {
                   username: this.loginForm.username
                 }
               })
+              const audio = new Audio('/assets/sounds/ciallo.mp3');
+              audio.play();
               ElMessage.success('登录成功')
               this.$router.push('/home')
             } else {
@@ -116,7 +118,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f7fa;
 }
 
 .login-card {

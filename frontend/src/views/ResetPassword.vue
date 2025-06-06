@@ -15,10 +15,10 @@
         <el-input v-model="resetForm.confirmPassword" type="password" placeholder="请确认新密码"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="handleReset" style="width: 100%">重置密码</el-button>
+        <el-button type="primary" @click="handleReset" style="width: 100% ;background-color: #FFB6C1;" >重置密码</el-button>
       </el-form-item>
       <div class="form-footer">
-        <router-link to="/login" class="back-to-login">返回登录</router-link>
+        <router-link to="/login" class="back-to-login" style="color: #FFB6C1;">返回登录</router-link>
       </div>
     </el-form>
   </div>
@@ -107,13 +107,12 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f7fa;
 }
 
 .reset-form {
   width: 400px;
   padding: 30px;
-  background-color: white;
+  background-color:#f5f7fa;
   border-radius: 4px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
@@ -136,6 +135,6 @@ h2 {
 }
 
 .back-to-login:hover {
-  color: #409EFF;
+  color: #f5f7fa;
 }
 </style>

@@ -26,10 +26,10 @@
             <el-input v-model="registerForm.email" placeholder="邮箱"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="handleRegister" style="width: 100%">注册</el-button>
+            <el-button type="primary" @click="handleRegister" style="width: 100%;background-color: #FFB6C1;">注册</el-button>
           </el-form-item>
           <el-form-item>
-            <el-link type="primary" @click="goToLogin">已有账号？立即登录</el-link>
+            <el-link type="primary" @click="goToLogin" style="color: #FFB6C1;">已有账号？立即登录</el-link>
           </el-form-item>
         </el-form>
       </el-card>
@@ -84,10 +84,11 @@
         this.$refs.registerForm.validate(async (valid) => {
           if (valid) {
             try {
-              // 移除confirmPassword，只发送username和password
               const { username, password, email } = this.registerForm
               await userApi.register({ username, password, email })
               ElMessage.success('注册成功')
+              const audio = new Audio('/assets/sounds/ciallo.mp3');
+              audio.play();
               this.$router.push('/login')
             } catch (error) {
               ElMessage.error(error.response?.data?.error || '注册失败')
@@ -108,7 +109,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f5f7fa;
   }
   
   .register-card {

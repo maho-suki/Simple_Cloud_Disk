@@ -3,7 +3,7 @@
     <el-container>
       <el-header>
         <div class="header-content">
-          <h2>简易网盘系统</h2>
+          <h2>西梅网盘</h2>
           <div class="user-info">
             <span>欢迎，{{ currentUser?.username }}</span>
             <el-button type="text" class="logout-btn" @click="handleLogout">退出登录</el-button>
@@ -51,7 +51,7 @@ export default {
 }
 
 .el-header {
-  background-color: #409EFF;
+  background-color: #FFB6C1;
   color: white;
   padding: 0 20px;
 }
